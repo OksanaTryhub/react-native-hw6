@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const state = {
         userId: null,
         nickname: null,
+        email: null,
         stateChange: false,
 }
     
@@ -14,6 +15,7 @@ export const authSlice = createSlice({
             ...state,
             userId: payload.userId,
             nickname: payload.nickname,
+            email: payload.email
         }),
         authStateChange: (state, { payload }) => ({
             ...state,
@@ -22,5 +24,3 @@ export const authSlice = createSlice({
         authSignOut: () => state,
     }
 })
-
-console.log('authSlice', authSlice)

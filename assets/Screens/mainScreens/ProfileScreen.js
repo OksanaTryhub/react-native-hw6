@@ -32,10 +32,11 @@ const ProfileScreen = ({ navigation }) => {
       const [posts, setPosts] = useState([]);
   const [plusIcon, setPlusIcon] = useState('plus')
   const [image, setImage] = useState(null);
+  const [userNickname, setUserNickname] = useState(null);
   // const [userPosts, setUserPosts] = useState([]);
 
   const dispatch = useDispatch();
-  const {userId} = useSelector((state) => state.auth)
+  const {userId, nickname} = useSelector((state) => state.auth)
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -48,6 +49,7 @@ const ProfileScreen = ({ navigation }) => {
           id: doc.id,
         }));
         setPosts(userPosts);
+        setUserNickname(nickname)
       });
 
       return () => unsubscribe();
@@ -133,7 +135,7 @@ const ProfileScreen = ({ navigation }) => {
                         <TouchableOpacity onPress={signOut} style={styles.logoutIcon}>
                             <Feather name="log-out" size={24} color='#BDBDBD' />
                         </TouchableOpacity>
-          <Text style={styles.title}>Natali Romanova</Text>
+          <Text style={styles.title}>{userNickname}</Text>
           <FlatList
                 data={posts}
                 keyExtractor={(item, index) => index.toString()}

@@ -13,19 +13,23 @@ const {updateUserProfile, authStateChange, authSignOut} = authSlice.actions;
 
 export const authSignUpUser = ({login, email, password}) => async (dispatch, getState) => {
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const user = await createUserWithEmailAndPassword(auth, email, password);
+        console.log('USER==>', user)
         
         await updateProfile(auth.currentUser,
             {
-            displayName: login,
+                displayName: login,
+                email: email
         })
 
         const {uid, displayName} = auth.currentUser;
        
         const userUpdateProfile = {
             userId: uid,
-            nickname: displayName
+            nickname: displayName,
+            email: email
         }
+        console.log('userUpdateProfile==>', userUpdateProfile)
         dispatch(updateUserProfile( userUpdateProfile))
 
     } catch (error) {

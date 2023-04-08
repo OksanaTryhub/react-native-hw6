@@ -26,6 +26,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { authSignUpUser } from "../../../redux/auth/authOperations";
+import { auth, storage, db } from './../../../firebase/config';
 
 SplashScreen.preventAutoHideAsync();
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect }  from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import { View, Text, Image, FlatList, StyleSheet } from 'react-native'
 
 import { Feather } from '@expo/vector-icons';
@@ -15,6 +16,7 @@ SplashScreen.preventAutoHideAsync();
 const DefaultPostsScreen = ({ navigation }) => {
     const [posts, setPosts] = useState([]);
     const [commentNumber, setCommentNumber] = useState(null)
+    const {nickname,email} = useSelector(state => state.auth)
 
     const getPosts = async () => {
         await onSnapshot(collection(db, 'posts'), snapshots => {
@@ -46,8 +48,8 @@ const DefaultPostsScreen = ({ navigation }) => {
             <View style={styles.userInfo}>
                 <Image style={styles.avatarImage } />
                 <View style={styles.info}>
-                <Text style={styles.name}> Natali Romanova </Text>
-                <Text style={styles.email}> email@example.com </Text>
+                <Text style={styles.name}> {nickname} </Text>
+                <Text style={styles.email}> {email} </Text>
                 </View>
             </View>
             <FlatList
